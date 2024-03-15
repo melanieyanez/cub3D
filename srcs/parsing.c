@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:52:45 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/04 16:29:57 by myanez-p         ###   ########.fr       */
+/*   Updated: 2024/03/15 10:30:09 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
 // attention le array n'a pas été alloué
+
+// ajouter un file pour les dimensions du fichier et de la map et pour l'indice
 
 /*----------------------------------------------*/
 /* Parse the map file to determine its dimensions 
@@ -26,6 +28,7 @@ void	array_filler(t_vars *vars)
 
 	i = 0;
 	fd = open(vars->map.path, O_RDONLY);
+	vars->file_array = (char **) malloc(sizeof(char *) * (get_file_dimensions(vars) + 1));
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -44,8 +47,6 @@ void	array_filler(t_vars *vars)
 // attention aussi si il y a un whitespace, il peut il y avoir un \ avant qui l'annule
 // pour les couleurs faire un checker pour la valeur du nombre
 // pour les couleurs compter les virgules, il en faut 2
-
-// a ajouter dans la libft
 
 void	map_parser(t_vars *vars)
 {

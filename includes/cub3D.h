@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/04 16:25:31 by myanez-p         ###   ########.fr       */
+/*   Updated: 2024/03/15 10:21:14 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 typedef struct s_map
 {
 	char	*path;
+	int		start_x;
+	int		start_y;
 	int		map_x;
 	int		map_y;
 	int		res_x;
