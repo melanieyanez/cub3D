@@ -6,19 +6,11 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:52:45 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/15 10:30:09 by melanieyane      ###   ########.fr       */
+/*   Updated: 2024/03/15 11:32:22 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
-
-// attention le array n'a pas été alloué
-
-// ajouter un file pour les dimensions du fichier et de la map et pour l'indice
-
-/*----------------------------------------------*/
-/* Parse the map file to determine its dimensions 
-   and stores the map into an array. */
 
 void	array_filler(t_vars *vars)
 {
@@ -64,21 +56,13 @@ void	copy_color(t_vars *vars, char *color)
 	return ;
 }
 
-int	ft_is_whitespace(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	return (0);
-}
-
 //clean_path à initialiser et allouer
-//creer ft_is_whitespace dans ma libft
+
 void	copy_path(t_vars *vars, char *path)
 {
 	int		i;
 	int		j;
-	char	*clean_path;
+	char	*clean_path = NULL;
 
 	i = 0;
 	j = 0;
@@ -131,15 +115,13 @@ void	parsing_process(t_vars *vars)
 	if (fd < 0)
 		map_error("Error opening map.\n");
 	array_filler(vars);
-	data_parser(vars); // pour recuperer les chemins des structures
+	data_parser(vars); // pour recuperer les chemins des textures
 	map_parser(vars); // pour recuperer les lignes de la map
 }
 
 // ajouter une fonction qui controle qu'on a bien chaque texture, et chaque texture est bien qu'une fois
 
-/*----------------------------------------------*/
-/* Count map elements and calculate line length. */
-
+/*
 void	map_counter(t_vars *vars, char *line)
 {
 	int	i;
@@ -156,3 +138,4 @@ void	map_counter(t_vars *vars, char *line)
 		i ++;
 	}
 }
+*/

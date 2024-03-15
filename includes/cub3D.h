@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/15 10:21:14 by melanieyane      ###   ########.fr       */
+/*   Updated: 2024/03/15 11:02:42 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@
 typedef struct s_map
 {
 	char	*path;
-	int		start_x;
-	int		start_y;
+	int		start;
 	int		map_x;
 	int		map_y;
 	int		res_x;
@@ -94,6 +93,10 @@ void	map_error(char *error_message);
 void	map_checker(t_vars *vars);
 void	extension_checker(t_vars *vars);
 void	wall_checker(t_vars *vars);
+
+//dimensions.c
+
+int		get_file_dimensions(t_vars *vars);
 
 //events.c
 

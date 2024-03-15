@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+         #
+#    By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/09 23:57:00 by melanieyane       #+#    #+#              #
-#    Updated: 2024/03/04 12:09:09 by myanez-p         ###   ########.fr        #
+#    Updated: 2024/03/15 10:36:17 by melanieyane      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ ${NAME} : ${OBJS}
 	@make -C mlx > /dev/null 2>&1;
 	@echo "\nCompiling the libft library..."
 	@make -C libft
-	@echo "\nCompiling so_long executable..."
+	@echo "\nCompiling cub3D executable..."
 	@${GCC} ${CFLAGS} ${OBJS} -Llibft -lft -Lmlx -lmlx -lz -framework OpenGL -framework AppKit -o ${NAME}
 	@echo "\nAll done!"
 			
