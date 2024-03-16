@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:17:43 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/15 11:28:00 by melanieyane      ###   ########.fr       */
+/*   Updated: 2024/03/16 12:08:49 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	get_file_dimensions(t_vars *vars)
 	return (i);
 }
 
-//enlever les whitespaces AVANT de chercher le start
+//segfault quand il y a des lignes en bas
 
 void	get_map_start(t_vars *vars)
 {
@@ -42,33 +42,38 @@ void	get_map_start(t_vars *vars)
 	int	end_map;
 
 	i = get_file_dimensions(vars);
-	while (vars->file_array[i] == NULL)
+	printf("%d\n", i);
+	while (vars->trimmed_file_array[i] == NULL || ft_strncmp(vars->file_array[i], "\n", 1))
 		i--;
+	printf("%d\n", i);
 	end_map = i;
-	while (i > 0 && vars->file_array[i] != NULL
-		&& ft_strncmp(vars->file_array[i], "NO ", 3)
-		&& ft_strncmp(vars->file_array[i], "SO ", 3)
-		&& ft_strncmp(vars->file_array[i], "EA ", 3)
-		&& ft_strncmp(vars->file_array[i], "WE ", 3)
-		&& ft_strncmp(vars->file_array[i], "F ", 3)
-		&& ft_strncmp(vars->file_array[i], "C ", 3))
+	while (i > 0 && vars->trimmed_file_array[i] != NULL
+		&& ft_strncmp(vars->trimmed_file_array[i], "\n", 1)
+		&& ft_strncmp(vars->trimmed_file_array[i], "NO ", 3)
+		&& ft_strncmp(vars->trimmed_file_array[i], "SO ", 3)
+		&& ft_strncmp(vars->trimmed_file_array[i], "EA ", 3)
+		&& ft_strncmp(vars->trimmed_file_array[i], "WE ", 3)
+		&& ft_strncmp(vars->trimmed_file_array[i], "F ", 3)
+		&& ft_strncmp(vars->trimmed_file_array[i], "C ", 3))
 		i --;
+	printf("%d\n", i);
+	printf("%d\n", end_map - i);
 	if (i == 0 || (end_map - i) < 3)
 		map_error("Map size is not valid.\n");
-	vars->map.start = i;
+	vars->map.start = i + 1;
 }
 
-//bien appeler get_map_start avant
-//verifier que mapx et mapy sont bien definis à -1
+//verifier x et y
 
 void	get_map_dimensions(t_vars *vars)
 {
 	int	i;
 
+	get_map_start(vars);
 	i = vars->map.start;
 	while (vars->file_array[i] != NULL)
 	{
-		if (vars->map.map_y < ft_strlen(vars->file_array[i])
+		if (vars->map.map_y < (int)ft_strlen(vars->file_array[i])
 			|| vars->map.map_y == -1)
 			vars->map.map_y = ft_strlen(vars->file_array[i]);
 		i ++;

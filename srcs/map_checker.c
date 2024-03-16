@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/11 18:00:37 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/04 12:26:47 by myanez-p         ###   ########.fr       */
+/*   Created: 2024/03/16 05:53:01 by melanieyane       #+#    #+#             */
+/*   Updated: 2024/03/16 05:59:04 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-/*----------------------------------------------*/
-/* Prints error messages and exits the program. */
+//map_counter un seul joueur, pas de char inconnu, map fermée
 
 void	map_error(char *error_message)
 {
@@ -22,9 +21,6 @@ void	map_error(char *error_message)
 	exit(1);
 }
 
-/*----------------------------------------------*/
-/* Checks if the map meets certain criteria. */
-
 void	map_checker(t_vars *vars)
 {
 	if (vars->utils.start_found > 1)
@@ -32,9 +28,6 @@ void	map_checker(t_vars *vars)
 	else if (vars->utils.start_found < 1)
 		map_error("No start position found.\n");
 }
-
-/*----------------------------------------------*/
-/* Checks if the map is enclosed by walls. */
 
 void	wall_checker(t_vars *vars)
 {	
@@ -57,18 +50,4 @@ void	wall_checker(t_vars *vars)
 			map_error("Map not enclosed into walls.\n");
 		j ++;
 	}
-}
-
-/*----------------------------------------------*/
-/* Checks if the map file has the correct file extension. */
-
-void	extension_checker(t_vars *vars)
-{
-	const char	*extension;
-
-	extension = ".cub";
-	if (ft_strlen(vars->map.path) >= ft_strlen(extension)
-		&& ft_strncmp(vars->map.path + ft_strlen(vars->map.path) \
-		- ft_strlen(extension), extension, ft_strlen(extension)) != 0)
-		map_error("Invalid file extension.\n");
 }

@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/15 11:02:42 by melanieyane      ###   ########.fr       */
+/*   Updated: 2024/03/16 11:26:00 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "../mlx/mlx.h"
 # include "../libft/includes/libft.h"
 
-# define WHITESPACE " \t\n\v\f\r"
+# define WHITESPACE " \t\v\f\r"
 
 # define SIZE 50
 
@@ -74,6 +74,7 @@ typedef struct s_vars
 	void		*wdw;
 	t_map		map;
 	char		**file_array;
+	char		**trimmed_file_array;
 	char		**map_array;
 	t_img		north_texture;
 	t_img		south_texture;
@@ -97,6 +98,7 @@ void	wall_checker(t_vars *vars);
 //dimensions.c
 
 int		get_file_dimensions(t_vars *vars);
+void	get_map_dimensions(t_vars *vars);
 
 //events.c
 
@@ -121,9 +123,10 @@ int		render(t_vars *vars);
 void	array_filler(t_vars *vars);
 void	map_parser(t_vars *vars);
 void	copy_color(t_vars *vars, char *color);
-void	copy_path(t_vars *vars, char *path);
+void	copy_path(t_vars *vars);
 void	data_parser(t_vars *vars);
 void	parsing_process(t_vars *vars);
 void	map_counter(t_vars *vars, char *line);
+void	line_cleaner(char **line);
 
 #endif

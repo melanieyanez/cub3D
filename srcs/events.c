@@ -3,26 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:31 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/04 16:21:48 by myanez-p         ###   ########.fr       */
+/*   Updated: 2024/03/16 05:54:19 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
-
-/*----------------------------------------------*/
-/*  Respond to key presses and releases 
-	to control player movement and exit the game. */
 
 void	close_window(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->wdw);
 	exit(0);
 }
-
-/*----------------------------------------------*/
 
 int	key_press_actions(int key, t_vars *vars)
 {
