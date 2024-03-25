@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/16 11:26:00 by melanieyane      ###   ########.fr       */
+/*   Updated: 2024/03/25 14:35:44 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,9 @@
 typedef struct s_map
 {
 	char	*path;
-	int		start;
-	int		map_x;
-	int		map_y;
-	int		res_x;
-	int		res_y;
+	int		top_limit;
+	int		bottom_limit;
+	int		size;
 }t_map;
 
 typedef struct s_img
@@ -123,7 +121,7 @@ int		render(t_vars *vars);
 void	array_filler(t_vars *vars);
 void	map_parser(t_vars *vars);
 void	copy_color(t_vars *vars, char *color);
-void	copy_path(t_vars *vars);
+void	copy_path(t_vars *vars, char *path);
 void	data_parser(t_vars *vars);
 void	parsing_process(t_vars *vars);
 void	map_counter(t_vars *vars, char *line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 05:53:01 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/16 05:59:04 by melanieyane      ###   ########.fr       */
+/*   Updated: 2024/03/25 14:23:25 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	map_error(char *error_message)
 	ft_printf("%s", error_message);
 	exit(1);
 }
-
+/*
 void	map_checker(t_vars *vars)
 {
 	if (vars->utils.start_found > 1)
@@ -51,3 +51,4 @@ void	wall_checker(t_vars *vars)
 		j ++;
 	}
 }
+*/

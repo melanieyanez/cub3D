@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:52:45 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/16 11:13:53 by melanieyane      ###   ########.fr       */
+/*   Updated: 2024/03/25 14:54:03 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+//ajouter toutes les protections de malloc
 
 void	array_filler(t_vars *vars)
 {
@@ -27,6 +29,7 @@ void	array_filler(t_vars *vars)
 	{
 		vars->file_array[i] = ft_strdup(line);
 		vars->trimmed_file_array[i] = ft_strdup(ft_strtrim(line, WHITESPACE));
+		//printf("%s", vars->trimmed_file_array[i]);
 		i++;
 		free(line);
 		line = get_next_line(fd);
@@ -35,6 +38,7 @@ void	array_filler(t_vars *vars)
 	free(line);
 }
 
+/*
 //on veut trim les whitespaces au debut et a la fin de chaque ligne
 //si c'est un chemin, on veut aussi trim les whitespaces internes sauf si precedés d'un '\'
 //pour les chemins, on ignore les whitespace et on copie jusqu'a un autre backslash ou fin de ligne
@@ -58,23 +62,28 @@ void	line_cleaner(char **line)
 	}
 	(*line)[j] = '\0';
 }
+*/
 
 void	map_parser(t_vars *vars)
 {
 	int	i;
 
 	get_map_dimensions(vars);
-	vars->map_array = (char **)malloc(sizeof(char *) * vars->map.map_y);
-	i = vars->map.start;
-	while (vars->file_array[i])
+	vars->map_array = (char **)malloc(sizeof(char *) * vars->map.size);
+	i = vars->map.top_limit;
+	while (i <= vars->map.bottom_limit)
 	{
-		vars->map_array[i - vars->map.start] = ft_strdup(vars->file_array[i]);
-		printf("%s", vars->map_array[i - vars->map.start]);
+		vars->map_array[i - vars->map.top_limit] = ft_strdup(vars->file_array[i]);
+		//printf("%s", vars->map_array[i - vars->map.top_limit]);
 		i++;
 	}
 }
 
 // fonction qui doit permettre de selectionner une texture ou interpreter la couleur RGB
+// on doit clean la ligne avant, comme pour copy path
+// puis verifier si les deux premier char, sont ./ dans ce cas on envoie dans copy path
+// sinon on stocke les valeurs des couleurs
+// en verifiant bien que ce sont des valeurs valides, et qu'il y a bien 2 virgules
 
 void	copy_color(t_vars *vars, char *color)
 {
@@ -83,50 +92,42 @@ void	copy_color(t_vars *vars, char *color)
 	return ;
 }
 
+//ajouter la partie pour clean le path des whitespaces
 //clean_path à initialiser et allouer
 //clean_path doit aussi eliminer les espaces dedans
-void	copy_path(t_vars *vars)
-{
-	int		i;
-	char	*clean_path;
 
-	i = 0;
-	while (vars->file_array[i])
-	{
-		if (ft_strncmp(vars->file_array[i], "NO", 2) == 0)
-			vars->north_texture.addr = ft_strdup(clean_path);
-		else if (ft_strncmp(vars->file_array[i], "SO", 2) == 0)
-			vars->south_texture.addr = ft_strdup(clean_path);
-		else if (ft_strncmp(vars->file_array[i], "WE", 2) == 0)
-			vars->west_texture.addr = ft_strdup(clean_path);
-		else if (ft_strncmp(vars->file_array[i], "EA", 2) == 0)
-			vars->east_texture.addr = ft_strdup(clean_path);
-		i ++;
-	}
+void	copy_path(t_vars *vars, char *path)
+{
+	if (ft_strncmp(path, "NO", 2) == 0 && vars->north_texture.addr == NULL)
+		vars->north_texture.addr = ft_strdup(path + 3);
+	else if (ft_strncmp(path, "SO", 2) == 0 && vars->south_texture.addr == NULL)
+		vars->south_texture.addr = ft_strdup(path + 3);
+	else if (ft_strncmp(path, "WE", 2) == 0 && vars->west_texture.addr == NULL)
+		vars->west_texture.addr = ft_strdup(path + 3);
+	else if (ft_strncmp(path, "EA", 2) == 0 && vars->east_texture.addr == NULL)
+		vars->east_texture.addr = ft_strdup(path + 3);
+	else
+		map_error("The texture path has been defined too many times.\n");
 }
-/*
+
 void	data_parser(t_vars *vars)
 {
 	int		i;
 
 	i = 0;
-	while (vars->file_array[i])
+	while (vars->trimmed_file_array[i])
 	{
-		vars->file_array[i] = ft_strtrim(vars->file_array[i], WHITESPACE);
-		if (ft_strncmp(vars->file_array[i], "NO", 2) == 0
-			|| ft_strncmp(vars->file_array[i], "SO", 2) == 0
-			|| ft_strncmp(vars->file_array[i], "WE", 2) == 0
-			|| ft_strncmp(vars->file_array[i], "EA", 2) == 0)
-			copy_path(vars, vars->file_array[i]);
-		else if (ft_strncmp(vars->file_array[i], "F", 1) == 0
-			|| ft_strncmp(vars->file_array[i], "C", 1) == 0)
-			copy_color(vars, vars->file_array[i]);
+		if (ft_strncmp(vars->trimmed_file_array[i], "NO", 2) == 0
+			|| ft_strncmp(vars->trimmed_file_array[i], "SO", 2) == 0
+			|| ft_strncmp(vars->trimmed_file_array[i], "WE", 2) == 0
+			|| ft_strncmp(vars->trimmed_file_array[i], "EA", 2) == 0)
+			copy_path(vars, vars->trimmed_file_array[i]);
+		//else if (ft_strncmp(vars->file_array[i], "F", 1) == 0
+		//	|| ft_strncmp(vars->file_array[i], "C", 1) == 0)
+		//	copy_color(vars, vars->file_array[i]);
 		i ++;
 	}
 }
-*/
-
-//on recupere la map d'abord comme ca elle n'est pas influencée par le trim
 
 void	parsing_process(t_vars *vars)
 {
@@ -137,5 +138,5 @@ void	parsing_process(t_vars *vars)
 		map_error("Error opening map.\n");
 	array_filler(vars);
 	map_parser(vars);
-	//data_parser(vars); // pour recuperer les chemins des textures
+	data_parser(vars);
 }

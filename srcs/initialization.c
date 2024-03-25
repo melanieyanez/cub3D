@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:00:40 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/16 07:11:03 by melanieyane      ###   ########.fr       */
+/*   Updated: 2024/03/25 14:41:52 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@
 void	initialization(t_vars *vars, char *file)
 {
 	vars->map.path = ft_strdup(file);
-	vars->map.map_x = -1;
-	vars->map.map_y = -1;
+	vars->north_texture.addr = NULL;
+	vars->south_texture.addr = NULL;
+	vars->west_texture.addr = NULL;
+	vars->east_texture.addr = NULL;
+	//vars->map.map_x = -1;
+	//vars->map.map_y = -1;
 	parsing_process(vars);
 	//vars->map.res_x = vars->map.map_x * SIZE;
 	//vars->map.res_y = vars->map.map_y * SIZE;

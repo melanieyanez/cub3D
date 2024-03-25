@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dimensions.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:17:43 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/16 12:08:49 by melanieyane      ###   ########.fr       */
+/*   Updated: 2024/03/25 13:54:39 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,49 +34,28 @@ int	get_file_dimensions(t_vars *vars)
 	return (i);
 }
 
-//segfault quand il y a des lignes en bas
-
-void	get_map_start(t_vars *vars)
+void	get_map_dimensions(t_vars *vars)
 {
 	int	i;
 	int	end_map;
 
 	i = get_file_dimensions(vars);
-	printf("%d\n", i);
-	while (vars->trimmed_file_array[i] == NULL || ft_strncmp(vars->file_array[i], "\n", 1))
+	while (i > 0 && (vars->trimmed_file_array[i] == NULL
+			|| vars->trimmed_file_array[i][0] == '\n'))
 		i--;
-	printf("%d\n", i);
+	vars->map.bottom_limit = i;
 	end_map = i;
-	while (i > 0 && vars->trimmed_file_array[i] != NULL
-		&& ft_strncmp(vars->trimmed_file_array[i], "\n", 1)
-		&& ft_strncmp(vars->trimmed_file_array[i], "NO ", 3)
-		&& ft_strncmp(vars->trimmed_file_array[i], "SO ", 3)
-		&& ft_strncmp(vars->trimmed_file_array[i], "EA ", 3)
-		&& ft_strncmp(vars->trimmed_file_array[i], "WE ", 3)
-		&& ft_strncmp(vars->trimmed_file_array[i], "F ", 3)
-		&& ft_strncmp(vars->trimmed_file_array[i], "C ", 3))
+	while (i > 0 && vars->trimmed_file_array[i] - 1 != NULL
+		&& vars->trimmed_file_array[i - 1][0] != '\n'
+		&& !(ft_strncmp(vars->trimmed_file_array[i - 1], "NO ", 3) == 0
+			|| ft_strncmp(vars->trimmed_file_array[i - 1], "SO ", 3) == 0
+			|| ft_strncmp(vars->trimmed_file_array[i - 1], "EA ", 3) == 0
+			|| ft_strncmp(vars->trimmed_file_array[i - 1], "WE ", 3) == 0
+			|| ft_strncmp(vars->trimmed_file_array[i - 1], "F ", 2) == 0
+			|| ft_strncmp(vars->trimmed_file_array[i - 1], "C ", 2) == 0))
 		i --;
-	printf("%d\n", i);
-	printf("%d\n", end_map - i);
-	if (i == 0 || (end_map - i) < 3)
+	vars->map.top_limit = i;
+	vars->map.size = vars->map.bottom_limit - vars->map.top_limit + 1;
+	if (i == 0 || vars->map.size < 3)
 		map_error("Map size is not valid.\n");
-	vars->map.start = i + 1;
-}
-
-//verifier x et y
-
-void	get_map_dimensions(t_vars *vars)
-{
-	int	i;
-
-	get_map_start(vars);
-	i = vars->map.start;
-	while (vars->file_array[i] != NULL)
-	{
-		if (vars->map.map_y < (int)ft_strlen(vars->file_array[i])
-			|| vars->map.map_y == -1)
-			vars->map.map_y = ft_strlen(vars->file_array[i]);
-		i ++;
-	}
-	vars->map.map_x = i - vars->map.start;
 }
