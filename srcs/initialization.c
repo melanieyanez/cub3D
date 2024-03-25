@@ -6,7 +6,7 @@
 /*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:00:40 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/25 14:41:52 by myanez-p         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:12:10 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ void	initialization(t_vars *vars, char *file)
 	vars->south_texture.addr = NULL;
 	vars->west_texture.addr = NULL;
 	vars->east_texture.addr = NULL;
+	vars->floor_texture.addr = NULL;
+	vars->floor_color[0] = -1;
+	vars->floor_color[1] = -1;
+	vars->floor_color[2] = -1;
+	vars->ceiling_texture.addr = NULL;
+	vars->ceiling_color[0] = -1;
+	vars->ceiling_color[1] = -1;
+	vars->ceiling_color[2] = -1;
 	//vars->map.map_x = -1;
 	//vars->map.map_y = -1;
 	parsing_process(vars);

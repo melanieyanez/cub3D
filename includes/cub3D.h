@@ -6,7 +6,7 @@
 /*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/25 14:35:44 by myanez-p         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:07:01 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ typedef struct s_vars
 	t_img		east_texture;
 	t_img		floor_texture;
 	t_img		ceiling_texture;
+	int			floor_color[3];
+	int			ceiling_color[3];
 	t_player	player;
 	t_utils		utils;
 }t_vars;

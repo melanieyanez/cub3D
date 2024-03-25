@@ -6,7 +6,7 @@
 /*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:52:45 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/25 14:54:03 by myanez-p         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:49:38 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,11 @@ void	array_filler(t_vars *vars)
 	free(line);
 }
 
-/*
 //on veut trim les whitespaces au debut et a la fin de chaque ligne
 //si c'est un chemin, on veut aussi trim les whitespaces internes sauf si precedés d'un '\'
 //pour les chemins, on ignore les whitespace et on copie jusqu'a un autre backslash ou fin de ligne
 //pour les couleurs, faire un checker pour la valeur du nombre, compter les virgules (il en faut 2), et gerer les espaces
-
+/*
 void	line_cleaner(char **line)
 {
 	int		i;
@@ -87,9 +86,28 @@ void	map_parser(t_vars *vars)
 
 void	copy_color(t_vars *vars, char *color)
 {
-	(void)vars;
-	(void)color;
-	return ;
+	if (ft_strncmp(color, "F ", 2) == 0 && vars->floor_texture.addr == NULL
+		&& vars->floor_color[0] == -1 && vars->floor_color[1] == -1
+		&& vars->floor_color[2] == -1)
+	{
+		if ()
+		{
+
+		}
+		else
+			copy_path(vars, color);
+	}
+	else if (ft_strncmp(color, "C ", 2) == 0
+		&& vars->ceiling_texture.addr == NULL && vars->ceiling_color[0] == -1
+		&& vars->ceiling_color[1] == -1 && vars->ceiling_color[2] == -1)
+	{
+		if ()
+		{
+			
+		}
+		else
+			copy_path(vars, color);	
+	}
 }
 
 //ajouter la partie pour clean le path des whitespaces
@@ -106,6 +124,11 @@ void	copy_path(t_vars *vars, char *path)
 		vars->west_texture.addr = ft_strdup(path + 3);
 	else if (ft_strncmp(path, "EA", 2) == 0 && vars->east_texture.addr == NULL)
 		vars->east_texture.addr = ft_strdup(path + 3);
+	else if (ft_strncmp(path, "F", 1) == 0 && vars->floor_texture.addr == NULL)
+		vars->floor_texture.addr = ft_strdup(path + 2);
+	else if (ft_strncmp(path, "C", 1) == 0
+		&& vars->ceiling_texture.addr == NULL)
+		vars->ceiling_texture.addr = ft_strdup(path + 2);
 	else
 		map_error("The texture path has been defined too many times.\n");
 }
@@ -122,9 +145,9 @@ void	data_parser(t_vars *vars)
 			|| ft_strncmp(vars->trimmed_file_array[i], "WE", 2) == 0
 			|| ft_strncmp(vars->trimmed_file_array[i], "EA", 2) == 0)
 			copy_path(vars, vars->trimmed_file_array[i]);
-		//else if (ft_strncmp(vars->file_array[i], "F", 1) == 0
-		//	|| ft_strncmp(vars->file_array[i], "C", 1) == 0)
-		//	copy_color(vars, vars->file_array[i]);
+		else if (ft_strncmp(vars->file_array[i], "F", 1) == 0
+			|| ft_strncmp(vars->file_array[i], "C", 1) == 0)
+			copy_color(vars, vars->file_array[i]);
 		i ++;
 	}
 }
