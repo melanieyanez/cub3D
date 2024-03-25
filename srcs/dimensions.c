@@ -6,13 +6,15 @@
 /*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:17:43 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/25 13:54:39 by myanez-p         ###   ########.fr       */
+/*   Updated: 2024/03/25 16:52:34 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
 //gerer qqpart erreur fd
+
+//prend les dimensions totales du fichier
 
 int	get_file_dimensions(t_vars *vars)
 {
@@ -33,6 +35,10 @@ int	get_file_dimensions(t_vars *vars)
 	free(line);
 	return (i);
 }
+
+//determine la taille, les limites inf et sup de la map
+//on utilise trimmed array ici mais quand on la copie
+//on doit utiliser le file array car on garde les espaces
 
 void	get_map_dimensions(t_vars *vars)
 {

@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   arg_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 05:53:14 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/16 06:21:41 by melanieyane      ###   ########.fr       */
+/*   Updated: 2024/03/25 16:56:41 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-//fonction pour verifier qu'on a toutes les textures et chacune qu'une fois
-//que les chemins fonctionnent, que le fichier existe
+//verifier que les chemins fonctionnent, que le fichier existe
 //que l'extension est correcte
 
 void	extension_checker(t_vars *vars)

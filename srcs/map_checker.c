@@ -6,13 +6,15 @@
 /*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 05:53:01 by melanieyane       #+#    #+#             */
-/*   Updated: 2024/03/25 14:23:25 by myanez-p         ###   ########.fr       */
+/*   Updated: 2024/03/25 16:56:04 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-//map_counter un seul joueur, pas de char inconnu, map fermée
+//il nous faut un et qu'un seul joueur dans map_checker
+//wall checker la map doit etre entourée de murs
+//il faut une fonction qui controle tous les chars = pas de char inconnu
 
 void	map_error(char *error_message)
 {
